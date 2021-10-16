@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Pressable, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#24292e",
-    
+    backgroundColor: "#24292e"
   },
   topText: {
     color: "white"
@@ -17,12 +16,14 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-        <Pressable>
-          <Link to="/"><Text style={styles.topText}>Repositories</Text></Link>
-        </Pressable>
-        <Pressable>
-          <Link to="/signin"><Text style={styles.topText}>SignIn</Text></Link>
-        </Pressable>
+        <ScrollView horizontal>
+            <Pressable style={{paddingHorizontal: 3}}>
+            <Link to="/"><Text style={styles.topText}>Repositories</Text></Link>
+            </Pressable>
+            <Pressable style={{paddingHorizontal: 3}}>
+            <Link to="/signin"><Text style={styles.topText}>SignIn</Text></Link>
+            </Pressable>
+        </ScrollView>
     </View>
     )
 };
