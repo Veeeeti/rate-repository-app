@@ -1,11 +1,9 @@
 import React from 'react';
-import Constants from 'expo-constants';
-import { Text, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 
-import theme from '../theme';
-import { Redirect, Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import SignIn from './SignIn';
 
 const styles = StyleSheet.create({

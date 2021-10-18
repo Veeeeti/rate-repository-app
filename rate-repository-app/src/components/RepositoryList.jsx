@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, View, StyleSheet, Text } from 'react-native';
+import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
@@ -9,6 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
+/*
 const repositories = [
   {
     id: 'jaredpalmer.formik',
@@ -55,25 +57,41 @@ const repositories = [
     ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
   },
 ];
+*/
+
+
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
+    // const { repositories } = useRepositories();
+    const { data, error, loading } = useRepositories();
+    console.log('data:',data);
+
+    // Get the nodes from the edges array
+    // const repositoryNodes = repositories
+    //   ? repositories.edges.map(edge => edge.node)
+    //   : [];
+
+    const repositoryNodes = data
+      ? data.repositories.edges.map(edge => edge.node)
+      : [];
 
     const renderItem = ({ item }) => {
         return(
         <>
-        <RepositoryItem item={item}/>
+        <RepositoryItem key={item.id} item={item}/>
         </>
         )
     };
-  return (
-    <FlatList
-      data={repositories}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={renderItem}
-    />
-  );
+
+    return (
+      <FlatList
+        data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={renderItem}
+      />
+    );
 };
 
 export default RepositoryList;
