@@ -12,7 +12,6 @@ const useSignIn = () => {
     //       password
     //   }
     mutate({ variables: {credentials:{ username, password }} });
-    //   return {data, error, loading};
     };
     return [signIn, result];
   };
