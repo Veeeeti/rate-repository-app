@@ -66,7 +66,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const RepositoryList = () => {
     // const { repositories } = useRepositories();
     const { data, error, loading } = useRepositories();
-    console.log('data:',data);
+    // console.log('data:',data);
 
     // Get the nodes from the edges array
     // const repositoryNodes = repositories

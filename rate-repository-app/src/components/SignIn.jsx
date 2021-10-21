@@ -6,6 +6,7 @@ import { Formik, useField } from 'formik';
 import Text from './Text';
 import theme from '../theme';
 import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router';
 
 const initialValues = {
     username: '',
@@ -63,6 +64,7 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
     const [signIn] = useSignIn();
+    const history = useHistory();
     const onSubmit = async (values) => {
       const { username, password } = values;
       console.log('username',username);
@@ -72,7 +74,8 @@ const SignIn = () => {
       try {
         const { data } = await signIn({ username, password });
         console.log('ran await signIn');
-        console.log(data);
+        console.log('data in SignIn.jsx', data);
+        history.push('/login');
       } catch (e) {
         console.log(e);
       }
