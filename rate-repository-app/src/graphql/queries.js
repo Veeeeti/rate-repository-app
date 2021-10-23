@@ -23,7 +23,7 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_REPOSITORY = gql`
-  query Repository($id: ID!) {
+  query GetRepository($id: ID!) {
     repository(id: $id) {
       id
       fullName
@@ -36,6 +36,20 @@ export const GET_REPOSITORY = gql`
       ratingAverage
       forksCount
       url
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 `;
