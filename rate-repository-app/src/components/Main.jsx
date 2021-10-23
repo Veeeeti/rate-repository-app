@@ -5,6 +5,7 @@ import AppBar from './AppBar';
 
 import { Route, Switch } from 'react-router';
 import SignIn from './SignIn';
+import SingleRepository from './SingleRepository';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,6 +21,9 @@ const Main = () => {
       <Switch>
         <Route path="/signin">
           <SignIn/>
+        </Route>
+        <Route path="/:id">
+          <SingleRepository/>
         </Route>
         <Route path="/">
           <RepositoryList/>

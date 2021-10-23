@@ -9,6 +9,7 @@ const useRepositories = () => {
     // Other options
   });
   console.log('fetched repositories...')
+  // console.log(data)
   return {data, error, loading};
 };
 

@@ -8,21 +8,6 @@ import theme from '../theme';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from 'react-router';
 
-const initialValues = {
-    username: '',
-    password: ''
-}
-
-const validationSchema = yup.object().shape({
-    username: yup
-    .string()
-    .required('Username is required'),
-    password: yup
-    .string()
-    .required('Password is required')
-});
-
-
 const styles = StyleSheet.create({
     loginContainer: {
         flexDirection: 'column',
@@ -62,6 +47,32 @@ const SignInForm = ({ onSubmit }) => {
     );
 }
 
+const SignInContainer = ({ onSubmit }) => {
+    const initialValues = {
+        username: '',
+        password: ''
+    }
+
+    const validationSchema = yup.object().shape({
+        username: yup
+        .string()
+        .required('Username is required'),
+        password: yup
+        .string()
+        .required('Password is required')
+    });
+
+    return (
+        <Formik 
+            initialValues={initialValues} 
+            onSubmit={onSubmit} 
+            validationSchema={validationSchema}
+        >
+            {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit}/>}
+        </Formik>
+    );
+};
+
 const SignIn = () => {
     const [signIn] = useSignIn();
     const history = useHistory();
@@ -82,13 +93,7 @@ const SignIn = () => {
     };
 
     return (
-        <Formik 
-            initialValues={initialValues} 
-            onSubmit={onSubmit} 
-            validationSchema={validationSchema}
-        >
-            {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit}/>}
-        </Formik>
+        <SignInContainer onSubmit={onSubmit}/>
     );
         
 };
