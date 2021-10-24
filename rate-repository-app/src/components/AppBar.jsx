@@ -66,6 +66,12 @@ const AppBar = () => {
                 <Text style={styles.topText}>Signout</Text>
               </Pressable>)
             }
+            {
+              !data?.authorizedUser && (
+              <Pressable style={{paddingHorizontal: 3}}>
+                <Link Link to="/signup"><Text style={styles.topText}>SignUp</Text></Link>
+              </Pressable>)
+            }
         </ScrollView>
     </View>
     )

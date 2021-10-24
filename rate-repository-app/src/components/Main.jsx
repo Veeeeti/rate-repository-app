@@ -5,6 +5,8 @@ import AppBar from './AppBar';
 
 import { Route, Switch } from 'react-router';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
+
 import SingleRepository from './SingleRepository';
 import CreateReview from './CreateReview';
 
@@ -22,6 +24,9 @@ const Main = () => {
       <Switch>
         <Route path="/createReview">
           <CreateReview/>
+        </Route>
+        <Route path="/signup">
+          <SignUp/>
         </Route>
         <Route path="/signin">
           <SignIn/>
