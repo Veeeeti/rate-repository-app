@@ -70,7 +70,7 @@ const SingleRepository = () => {
 
     const item = repository;
     const reviews = item.reviews.edges;
-    console.log('reviews',reviews);
+    // console.log('reviews',reviews);
 
     return(
     <View>

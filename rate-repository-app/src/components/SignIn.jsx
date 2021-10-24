@@ -76,10 +76,9 @@ const SignInContainer = ({ onSubmit }) => {
 const SignIn = () => {
     const [signIn] = useSignIn();
     const history = useHistory();
+    
     const onSubmit = async (values) => {
       const { username, password } = values;
-      console.log('username',username);
-      console.log('password',password);
       console.log('values',values);
   
       try {
@@ -89,7 +88,7 @@ const SignIn = () => {
         history.push('/login');
       } catch (e) {
         console.log(e);
-      }
+      };
     };
 
     return (

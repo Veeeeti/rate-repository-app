@@ -6,6 +6,7 @@ import { gql, useQuery } from '@apollo/client';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useApolloClient } from '@apollo/client';
 import { useHistory } from 'react-router';
+import CreateReview from './CreateReview';
 
 // import useAuthStorage from '../hooks/useAuthStorage';
 
@@ -46,11 +47,17 @@ const AppBar = () => {
             <Pressable style={{paddingHorizontal: 3}}>
               <Link to="/"><Text style={styles.topText}>Repositories</Text></Link>
             </Pressable>
-            
+            {
+              data?.authorizedUser && (
+                <Pressable style={{paddingHorizontal: 3}}>
+                  <Link Link to="/createReview"><Text style={styles.topText}>Create review</Text></Link>
+                </Pressable>
+              )
+            }
             {
               !data?.authorizedUser && (
               <Pressable style={{paddingHorizontal: 3}}>
-                <Link  Link to="/signin"><Text style={styles.topText}>SignIn</Text></Link>
+                <Link Link to="/signin"><Text style={styles.topText}>SignIn</Text></Link>
               </Pressable>)
             }
             {

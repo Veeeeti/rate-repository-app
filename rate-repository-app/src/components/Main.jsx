@@ -6,6 +6,7 @@ import AppBar from './AppBar';
 import { Route, Switch } from 'react-router';
 import SignIn from './SignIn';
 import SingleRepository from './SingleRepository';
+import CreateReview from './CreateReview';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +20,9 @@ const Main = () => {
     <View style={styles.container}>
       <AppBar/>
       <Switch>
+        <Route path="/createReview">
+          <CreateReview/>
+        </Route>
         <Route path="/signin">
           <SignIn/>
         </Route>
