@@ -4,19 +4,28 @@ import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import { Picker } from '@react-native-picker/picker';
 import theme from '../theme';
+import TextInput from './TextInput';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
     backgroundColor: '#e1e4e8'
   },
+  textInput: {
+    display: 'flex',
+    padding: 5,
+    margin: 10,
+    borderWidth: 2,
+    borderColor: theme.colors.textSecondary
+  }
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
+export const RepositoryListContainer = ({ repositories, order, setOrder, search, setSearch}) => {
 
-  // console.log('data',repositories)
+  console.log('data',repositories)
   const repositoryNodes = repositories
     ? repositories.repositories.edges.map(edge => edge.node)
     : [];
@@ -31,6 +40,11 @@ export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
 
   return (
     <View>
+      <TextInput 
+        style={styles.textInput} 
+        placeholder="Search for a repository..." 
+        value={search.value} 
+        onChangeText={(text)=> setSearch(text)}/>
       <Picker
       selectedValue={order}
       onValueChange={(itemValue, itemIndex) => setOrder(itemValue)}
@@ -50,7 +64,12 @@ export const RepositoryListContainer = ({ repositories, order, setOrder }) => {
 
 const RepositoryList = () => {
     const [order, setOrder] = useState('CREATED_AT');
-    const { data, error, loading } = useRepositories({order});
+
+    const [search, setSearch] = useState('');
+    const [searchValue] = useDebounce(search,500);
+
+    const { data, error, loading } = useRepositories({order, searchValue});
+    console.log('search:',search)
 
     console.log('order',order);
     // console.log('data:',data);
@@ -79,6 +98,8 @@ const RepositoryList = () => {
       repositories={data}
       order={order}
       setOrder={setOrder}
+      search={search}
+      setSearch={setSearch}
       />
     );
 };
