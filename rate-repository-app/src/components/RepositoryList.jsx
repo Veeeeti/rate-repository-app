@@ -23,11 +23,10 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, order, setOrder, search, setSearch}) => {
-
-  console.log('data',repositories)
+export const RepositoryListContainer = ({ repositories, onEndReach, order, setOrder, search, setSearch}) => {
+  // console.log('data',repositories)
   const repositoryNodes = repositories
-    ? repositories.repositories.edges.map(edge => edge.node)
+    ? repositories.edges.map(edge => edge.node)
     : [];
   
   const renderItem = ({ item }) => {
@@ -57,6 +56,9 @@ export const RepositoryListContainer = ({ repositories, order, setOrder, search,
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={renderItem}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
+        keyExtractor={(item) => item.id}
       />
     </View>
   );
@@ -68,38 +70,23 @@ const RepositoryList = () => {
     const [search, setSearch] = useState('');
     const [searchValue] = useDebounce(search,500);
 
-    const { data, error, loading } = useRepositories({order, searchValue});
-    console.log('search:',search)
-
+    const { repositories, fetchMore } = useRepositories({first: 5, order, searchValue});
+    console.log('search:',search);
     console.log('order',order);
-    // console.log('data:',data);
 
-    // const repositoryNodes = data
-    //   ? data.repositories.edges.map(edge => edge.node)
-    //   : [];
+    const onEndReach = () => {
+      console.log('react end of list');
+      fetchMore();
+    };
 
-    // const renderItem = ({ item }) => {
-    //   return(
-    //     <>
-    //       <RepositoryItem key={item.id} item={item}/>
-    //     </>
-    //   )
-    // };
-
-    // return (
-    //   <FlatList
-    //     data={repositoryNodes}
-    //     ItemSeparatorComponent={ItemSeparator}
-    //     renderItem={renderItem}
-    //   />
-    // );
     return (
     <RepositoryListContainer 
-      repositories={data}
+      repositories={repositories}
       order={order}
       setOrder={setOrder}
       search={search}
       setSearch={setSearch}
+      onEndReach={onEndReach}
       />
     );
 };
