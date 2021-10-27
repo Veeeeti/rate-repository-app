@@ -55,6 +55,12 @@ const AppBar = () => {
               )
             }
             {
+              data?.authorizedUser && (
+              <Pressable style={{paddingHorizontal: 3}}>
+                <Link to="/myReviews"><Text style={styles.topText}>My reviews</Text></Link>
+              </Pressable>)
+            }
+            {
               !data?.authorizedUser && (
               <Pressable style={{paddingHorizontal: 3}}>
                 <Link Link to="/signin"><Text style={styles.topText}>SignIn</Text></Link>
